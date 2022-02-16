@@ -1,4 +1,5 @@
 """
+[EARLY STAGE]
 
 This module implements a convolutional neural network with ResNet50 architecture,
 pretrained with ImageNet. The net is intended to classify input images in 5 classes:

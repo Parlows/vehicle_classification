@@ -1,6 +1,6 @@
 """
 
-Progress bar
+This module defines a function that prints a progress bar.
 
 """
 

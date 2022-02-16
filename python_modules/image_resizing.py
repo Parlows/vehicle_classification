@@ -1,6 +1,6 @@
 """
 
-This module performs data augmentation for several classes in the vehicle dataset.
+This module resize each image to a specific size.
 Author: Pablo Regodón Cerezo.
 Date: Februrary 2022.
 
@@ -13,6 +13,7 @@ import random
 from progress_bar import print_progress_bar
 from PIL import Image
 
+# Used paths
 input_path = "../augmented_ds/train/train/"
 output_path = "../resized_ds/train/train/"
 

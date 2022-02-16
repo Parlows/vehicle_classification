@@ -1,7 +1,7 @@
 """
 
-This is a demo script that builds a very simple CNN to do the desired
-classification.
+This is a module copied from freecodecamp.org. Link to the video the code
+was copied from: https://www.youtube.com/watch?v=qFJeN9V1ZsI
 
 """
 
@@ -27,9 +27,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 original_dataset_path = '../partial_ds/train/train/'
 
-""" DONE
 # Organize data into train, valid, test dirs
-
 if os.path.isdir('../demo_ds/train/Car') is False:
 	os.makedirs('../demo_ds/train/Car')
 	os.makedirs('../demo_ds/train/Truck')
@@ -46,7 +44,8 @@ if os.path.isdir('../demo_ds/train/Car') is False:
 	os.makedirs('../demo_ds/test/Bus')
 	os.makedirs('../demo_ds/test/Van')
 	os.makedirs('../demo_ds/test/Motorcycle')
-
+	
+	# Take a portion of the original dataset
 	for c in random.sample(glob.glob(original_dataset_path+'Car/*'), 500):
 		shutil.copy(c, '../demo_ds/train/Car')
 	for c in random.sample(glob.glob(original_dataset_path+'Truck/*'), 500):
@@ -78,12 +77,12 @@ if os.path.isdir('../demo_ds/train/Car') is False:
 	for c in random.sample(glob.glob(original_dataset_path+'Motorcycle/*'), 50):
 		shutil.copy(c, '../demo_ds/test/Motorcycle')
 
-"""
-
+# Set the different datasets paths
 train_path = '../demo_ds/train'
 valid_path = '../demo_ds/valid'
 test_path = '../demo_ds/test'
 
+# Load the sets
 train_batches = ImageDataGenerator(preprocessing_function=tf.keras.applications.vgg16.preprocess_input) \
 	.flow_from_directory(
 			     directory=train_path,
@@ -106,12 +105,17 @@ test_batches = ImageDataGenerator(preprocessing_function=tf.keras.applications.v
 			    batch_size=5
 			    )
 
+# Assure our datasets have been loaded correctly
 assert train_batches.n == 2500
 assert valid_batches.n == 500
 assert test_batches.n == 250
 
-"""
+
 imgs, labels = next(train_batches) # 10 images + 10 labels
+
+"""
+This function plots an array of images passed as a parameter.
+
 """
 def plotImages(images_arr):
 	fig, axes = plt.subplots(1, 10, figsize=(20, 20))
@@ -121,10 +125,11 @@ def plotImages(images_arr):
 		ax.axis('off')
 	plt.tight_layout()
 	plt.show()
-"""
+
 plotImages(imgs)
 print(labels)
-"""
+
+# Train or load our model
 if "demo_model.h5" in os.listdir():
 	model = keras.models.load_model('demo_model.h5')
 	
@@ -194,28 +199,4 @@ test_batches.class_indices
 
 cm_plot_labels = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
 plot_confusion_matrix(cm=cm, classes=cm_plot_labels)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
