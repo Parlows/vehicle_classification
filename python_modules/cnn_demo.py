@@ -132,7 +132,7 @@ print(labels)
 plotImages(imgs)
 
 # Train or load our model
-if "demo_model.h5" in os.listdir():
+if "cnn_demo.h5" in os.listdir():
 	model = keras.models.load_model('cnn_demo.h5')
 	
 	model.summary()
