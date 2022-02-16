@@ -28,54 +28,55 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 original_dataset_path = '../partial_ds/train/train/'
 
 # Organize data into train, valid, test dirs
-if os.path.isdir('../demo_ds/train/Car') is False:
-	os.makedirs('../demo_ds/train/Car')
-	os.makedirs('../demo_ds/train/Truck')
-	os.makedirs('../demo_ds/train/Bus')
-	os.makedirs('../demo_ds/train/Van')
-	os.makedirs('../demo_ds/train/Motorcycle')
-	os.makedirs('../demo_ds/valid/Car')
-	os.makedirs('../demo_ds/valid/Bus')
-	os.makedirs('../demo_ds/valid/Truck')
-	os.makedirs('../demo_ds/valid/Van')
-	os.makedirs('../demo_ds/valid/Motorcycle')
-	os.makedirs('../demo_ds/test/Car')
-	os.makedirs('../demo_ds/test/Truck')
-	os.makedirs('../demo_ds/test/Bus')
-	os.makedirs('../demo_ds/test/Van')
-	os.makedirs('../demo_ds/test/Motorcycle')
-	
-	# Take a portion of the original dataset
-	for c in random.sample(glob.glob(original_dataset_path+'Car/*'), 500):
-		shutil.copy(c, '../demo_ds/train/Car')
-	for c in random.sample(glob.glob(original_dataset_path+'Truck/*'), 500):
-		shutil.copy(c, '../demo_ds/train/Truck')
-	for c in random.sample(glob.glob(original_dataset_path+'Bus/*'), 500):
-		shutil.copy(c, '../demo_ds/train/Bus')
-	for c in random.sample(glob.glob(original_dataset_path+'Van/*'), 500):
-		shutil.copy(c, '../demo_ds/train/Van')
-	for c in random.sample(glob.glob(original_dataset_path+'Motorcycle/*'), 500):
-		shutil.copy(c, '../demo_ds/train/Motorcycle')
-	for c in random.sample(glob.glob(original_dataset_path+'Car/*'), 100):
-		shutil.copy(c, '../demo_ds/valid/Car')
-	for c in random.sample(glob.glob(original_dataset_path+'Truck/*'), 100):
-		shutil.copy(c, '../demo_ds/valid/Truck')
-	for c in random.sample(glob.glob(original_dataset_path+'Bus/*'), 100):
-		shutil.copy(c, '../demo_ds/valid/Bus')
-	for c in random.sample(glob.glob(original_dataset_path+'Van/*'), 100):
-		shutil.copy(c, '../demo_ds/valid/Van')
-	for c in random.sample(glob.glob(original_dataset_path+'Motorcycle/*'), 100):
-		shutil.copy(c, '../demo_ds/valid/Motorcycle')
-	for c in random.sample(glob.glob(original_dataset_path+'Car/*'), 50):
-		shutil.copy(c, '../demo_ds/test/Car')
-	for c in random.sample(glob.glob(original_dataset_path+'Truck/*'), 50):
-		shutil.copy(c, '../demo_ds/test/Truck')
-	for c in random.sample(glob.glob(original_dataset_path+'Bus/*'), 50):
-		shutil.copy(c, '../demo_ds/test/Bus')
-	for c in random.sample(glob.glob(original_dataset_path+'Van/*'), 50):
-		shutil.copy(c, '../demo_ds/test/Van')
-	for c in random.sample(glob.glob(original_dataset_path+'Motorcycle/*'), 50):
-		shutil.copy(c, '../demo_ds/test/Motorcycle')
+if os.path.isdir('../demo_ds/') is False:
+	if os.path.isdir('../demo_ds/train/Car') is False:
+		os.makedirs('../demo_ds/train/Car')
+		os.makedirs('../demo_ds/train/Truck')
+		os.makedirs('../demo_ds/train/Bus')
+		os.makedirs('../demo_ds/train/Van')
+		os.makedirs('../demo_ds/train/Motorcycle')
+		os.makedirs('../demo_ds/valid/Car')
+		os.makedirs('../demo_ds/valid/Bus')
+		os.makedirs('../demo_ds/valid/Truck')
+		os.makedirs('../demo_ds/valid/Van')
+		os.makedirs('../demo_ds/valid/Motorcycle')
+		os.makedirs('../demo_ds/test/Car')
+		os.makedirs('../demo_ds/test/Truck')
+		os.makedirs('../demo_ds/test/Bus')
+		os.makedirs('../demo_ds/test/Van')
+		os.makedirs('../demo_ds/test/Motorcycle')
+		
+		# Take a portion of the original dataset
+		for c in random.sample(glob.glob(original_dataset_path+'Car/*'), 500):
+			shutil.copy(c, '../demo_ds/train/Car')
+		for c in random.sample(glob.glob(original_dataset_path+'Truck/*'), 500):
+			shutil.copy(c, '../demo_ds/train/Truck')
+		for c in random.sample(glob.glob(original_dataset_path+'Bus/*'), 500):
+			shutil.copy(c, '../demo_ds/train/Bus')
+		for c in random.sample(glob.glob(original_dataset_path+'Van/*'), 500):
+			shutil.copy(c, '../demo_ds/train/Van')
+		for c in random.sample(glob.glob(original_dataset_path+'Motorcycle/*'), 500):
+			shutil.copy(c, '../demo_ds/train/Motorcycle')
+		for c in random.sample(glob.glob(original_dataset_path+'Car/*'), 100):
+			shutil.copy(c, '../demo_ds/valid/Car')
+		for c in random.sample(glob.glob(original_dataset_path+'Truck/*'), 100):
+			shutil.copy(c, '../demo_ds/valid/Truck')
+		for c in random.sample(glob.glob(original_dataset_path+'Bus/*'), 100):
+			shutil.copy(c, '../demo_ds/valid/Bus')
+		for c in random.sample(glob.glob(original_dataset_path+'Van/*'), 100):
+			shutil.copy(c, '../demo_ds/valid/Van')
+		for c in random.sample(glob.glob(original_dataset_path+'Motorcycle/*'), 100):
+			shutil.copy(c, '../demo_ds/valid/Motorcycle')
+		for c in random.sample(glob.glob(original_dataset_path+'Car/*'), 50):
+			shutil.copy(c, '../demo_ds/test/Car')
+		for c in random.sample(glob.glob(original_dataset_path+'Truck/*'), 50):
+			shutil.copy(c, '../demo_ds/test/Truck')
+		for c in random.sample(glob.glob(original_dataset_path+'Bus/*'), 50):
+			shutil.copy(c, '../demo_ds/test/Bus')
+		for c in random.sample(glob.glob(original_dataset_path+'Van/*'), 50):
+			shutil.copy(c, '../demo_ds/test/Van')
+		for c in random.sample(glob.glob(original_dataset_path+'Motorcycle/*'), 50):
+			shutil.copy(c, '../demo_ds/test/Motorcycle')
 
 # Set the different datasets paths
 train_path = '../demo_ds/train'
@@ -102,7 +103,8 @@ test_batches = ImageDataGenerator(preprocessing_function=tf.keras.applications.v
 			    directory=test_path,
 			    target_size=(224,224),
 			    classes=['Car','Truck','Bus','Van','Motorcycle'],
-			    batch_size=5
+			    batch_size=5,
+			    shuffle=False
 			    )
 
 # Assure our datasets have been loaded correctly
@@ -111,27 +113,27 @@ assert valid_batches.n == 500
 assert test_batches.n == 250
 
 
-imgs, labels = next(train_batches) # 10 images + 10 labels
+imgs, labels = next(train_batches) # 5 images + 5 labels
 
 """
 This function plots an array of images passed as a parameter.
 
 """
 def plotImages(images_arr):
-	fig, axes = plt.subplots(1, 10, figsize=(20, 20))
+	fig, axes = plt.subplots(1, 5, figsize=(20, 20))
 	axes = axes.flatten()
 	for img, ax in zip( images_arr, axes):
 		ax.imshow(img)
 		ax.axis('off')
 	plt.tight_layout()
-	plt.show()
+	plt.show(block=True)
 
-plotImages(imgs)
 print(labels)
+plotImages(imgs)
 
 # Train or load our model
 if "demo_model.h5" in os.listdir():
-	model = keras.models.load_model('demo_model.h5')
+	model = keras.models.load_model('cnn_demo.h5')
 	
 	model.summary()
 else:
@@ -150,19 +152,18 @@ else:
 
 	model.fit(x=train_batches, validation_data=valid_batches, epochs=10, verbose=2)
 	
-	model.save('demo_model.h5')
+	model.save('cnn_demo.h5')
 
 # Prediction
 
-"""
+
 test_imgs, test_labels = next(test_batches)
-plotImages(test_imgs)
 print(test_labels)
-"""
+plotImages(test_imgs)
+print(test_batches.classes)
 
 predictions = model.predict(x=test_batches, verbose=0)
-
-np.round(predictions)
+print(np.round(predictions))
 
 cm = confusion_matrix(y_true=test_batches.classes, y_pred=np.argmax(predictions, axis=-1))
 
@@ -194,8 +195,9 @@ def plot_confusion_matrix(cm, classes,
 	plt.tight_layout()
 	plt.ylabel("True label")
 	plt.xlabel("Predicted label")
+	plt.show()
 
-test_batches.class_indices
+print(test_batches.class_indices)
 
 cm_plot_labels = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
 plot_confusion_matrix(cm=cm, classes=cm_plot_labels)
