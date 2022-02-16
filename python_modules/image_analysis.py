@@ -1,6 +1,6 @@
 """
 
-This module analyses the images from the dataset and extracts valuable data.
+This module analyzes the images from the dataset and extracts valuable data.
 Author: Pablo Regodón Cerezo.
 Date: February 2021.
 

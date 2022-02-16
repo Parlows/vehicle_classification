@@ -1,0 +1,5 @@
+# Ignore all datasets
+*_ds
+
+# Ignore cache
+python_modules/__pycache__ 
