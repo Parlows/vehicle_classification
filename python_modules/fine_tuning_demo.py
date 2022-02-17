@@ -132,10 +132,4 @@ print(test_batches.class_indices)
 
 cm_plot_labels = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
 plot_confusion_matrix(cm=cm, classes=cm_plot_labels, title='Confusion Matrix')
-
-
-
-
-
-
 	
