@@ -5,4 +5,4 @@
 python_modules/__pycache__ 
 
 # Ignore weight files
-python_modules/*.h5
+saved_models
