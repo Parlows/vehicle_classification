@@ -85,7 +85,7 @@ else:
 	efficientnet_model = tf.keras.applications.EfficientNetB3(
 							  include_top=False,
 							  weights='imagenet',
-							  input_shape=(224, 224, 3),
+							  input_shape=(300, 300, 3),
 							  pooling='avg'
 							 )
 	efficientnet_model.summary()
@@ -94,7 +94,10 @@ else:
 	output = Dense(units=5, activation='softmax')(x)
 	
 	model = Model(inputs=efficientnet_model.input, outputs=output)
-	
+	""" For transfer learning
+	for layer in model.layers[:-1]:
+		layer.trainable = False
+	"""
 	model.summary()
 	
 	model.compile(optimizer=Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
