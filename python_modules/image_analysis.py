@@ -11,8 +11,8 @@ import os
 from PIL import Image
 
 #ds_path = "../complete_ds/train/train/" # Absolute path to the complete dataset
-ds_path = "../partial_ds/train/train/" # Absolute path to the partial dataset
-#ds_path = "../augmented_ds/train/train/" # Absolute path to the augmented dataset
+#ds_path = "../partial_ds/train/train/" # Absolute path to the partial dataset
+ds_path = "../augmented_ds/train/" # Absolute path to the augmented dataset
 
 categories = 0 # Number of categories
 image_number = 0 # Number of images

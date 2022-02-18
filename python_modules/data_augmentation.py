@@ -77,11 +77,12 @@ def augmentation(categorie):
 		print_progress_bar(i, len(gaussian_blur_set), prefix='     Gaussian blur:', suffix='complete', length=50)
 	
 	i=0
+	possible_values = (0.5, 0.6, 0.7, 1.3, 1.4, 1.5)
 	print_progress_bar(i, len(brightness_set), prefix='     Brightness:', suffix='complete', length=50)
 	for fname in brightness_set:
 		fpath = input_path + fname
 		image = Image.open(fpath)
-		image = ImageEnhance.Brightness(image).enhance(random.randint(5,15) / 10)
+		image = ImageEnhance.Brightness(image).enhance(possible_values[random.randint(0,5)])
 		image.save(output_path + "bright_" + fname)
 		i += 1
 		print_progress_bar(i, len(brightness_set), prefix='     Brightness:', suffix='complete', length=50)
