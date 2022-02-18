@@ -11,11 +11,11 @@ import os
 import shutil
 import random
 from progress_bar import print_progress_bar
-from PIL import Image
+from PIL import Image, ImageFilter, ImageEnhance
 
 # The pahts which will be used
-input_path_preffix = "../partial_ds/train/train/"
-output_path_preffix = "../augmented_ds/train/train/"
+input_path_preffix = "../partial_ds/train/"
+output_path_preffix = "../augmented_ds/train/"
 
 """
 This function performs the corresponding data augmentation given the category
@@ -42,21 +42,21 @@ def augmentation(categorie):
 	
 	# Prepares the sets that will be given each transformation
 	if categorie == "Truck" or categorie == "Bus":
-		rotate_45_set = image_list[:middle_index]
-		rotate_315_set = image_list[middle_index:]
+		gaussian_blur_set = image_list[:middle_index]
+		brightness_set = image_list[middle_index:]
 		random.shuffle(image_list)
 		flip_set = image_list[:middle_index]
 	elif categorie == "Motorcycle":
-		rotate_45_set = image_list[:middle_index]
-		rotate_315_set = image_list[middle_index:]
+		gaussian_blur_set = image_list[:middle_index]
+		brightness_set = image_list[middle_index:]
 		flip_set = []
 	elif categorie == "Car":
-		rotate_45_set = []
-		rotate_315_set = []
+		gaussian_blur_set = []
+		brightness_set = []
 		flip_set = []
 	elif categorie == "Van":
-		rotate_45_set = image_list
-		rotate_315_set = image_list
+		gaussian_blur_set = image_list
+		brightness_set = image_list
 		flip_set = image_list
 	
 	
@@ -67,24 +67,24 @@ def augmentation(categorie):
 	
 	# Performs the augmentation
 	i = 0
-	print_progress_bar(i, len(rotate_45_set), prefix='     45º Rotation:', suffix='complete', length=50)
-	for fname in rotate_45_set:
+	print_progress_bar(i, len(gaussian_blur_set), prefix='     Gaussian blur:', suffix='complete', length=50)
+	for fname in gaussian_blur_set:
 		fpath = input_path + fname
 		image = Image.open(fpath)
-		image = image.rotate(angle=45, expand=False)
-		image.save(output_path + "45_" + fname)
+		image = image.filter(ImageFilter.GaussianBlur(radius=random.randint(2, 5)))
+		image.save(output_path + "blur_" + fname)
 		i += 1
-		print_progress_bar(i, len(rotate_45_set), prefix='     45º Rotation:', suffix='complete', length=50)
+		print_progress_bar(i, len(gaussian_blur_set), prefix='     Gaussian blur:', suffix='complete', length=50)
 	
 	i=0
-	print_progress_bar(i, len(rotate_315_set), prefix='     315º Rotation:', suffix='complete', length=50)
-	for fname in rotate_315_set:
+	print_progress_bar(i, len(brightness_set), prefix='     Brightness:', suffix='complete', length=50)
+	for fname in brightness_set:
 		fpath = input_path + fname
 		image = Image.open(fpath)
-		image = image.rotate(angle=315, expand=False)
-		image.save(output_path + "315_" + fname)
+		image = ImageEnhance.Brightness(image).enhance(random.randint(5,15) / 10)
+		image.save(output_path + "bright_" + fname)
 		i += 1
-		print_progress_bar(i, len(rotate_315_set), prefix='     315º Rotation:', suffix='complete', length=50)
+		print_progress_bar(i, len(brightness_set), prefix='     Brightness:', suffix='complete', length=50)
 	
 	random.shuffle(image_list)
 	
