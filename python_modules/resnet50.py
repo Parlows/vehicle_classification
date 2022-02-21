@@ -97,8 +97,13 @@ else:
 	
 	model.summary()
 	
-	model.compile(optimizer=Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
-	model.fit(x=train_batches, validation_data=valid_batches, epochs=10, verbose=2)
+	learning_rate = 0.0001
+	optimizer = Adam(learnging_rate=learning_rate)
+	loss = 'categorical_crossentropy'
+	epochs = 10
+	
+	model.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
+	model.fit(x=train_batches, validation_data=valid_batches, epochs=epochs, verbose=2)
 	model.save('../saved_models/resnet50.h5')
 
 # Prediction
