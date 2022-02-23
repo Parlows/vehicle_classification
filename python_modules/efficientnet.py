@@ -26,9 +26,9 @@ import matplotlib.pyplot as plt
 import os
 
 # Set the different datasets paths
-train_path = '../partial_ds/train'
-valid_path = '../partial_ds/valid'
-test_path = '../partial_ds/test'
+train_path = '../augmented_ds/train'
+valid_path = '../augmented_ds/valid'
+test_path = '../augmented_ds/test'
 
 # Load the sets
 train_batches = ImageDataGenerator(tf.keras.applications.efficientnet.preprocess_input) \
@@ -101,7 +101,7 @@ else:
 	model.summary()
 	
 	learning_rate = 0.0001
-	optimizer = Adam(learnging_rate=learning_rate)
+	optimizer = Adam(learning_rate=learning_rate)
 	loss = 'categorical_crossentropy'
 	epochs = 10
 	
