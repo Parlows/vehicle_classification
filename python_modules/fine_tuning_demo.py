@@ -60,9 +60,9 @@ assert train_batches.n == 2500
 assert valid_batches.n == 500
 assert test_batches.n == 250
 
-if "fine_tuning_demo.h5" in os.listdir():
+if "fine_tuning_demo.h5" in os.listdir("../saved_models/"):
 	
-	model = keras.models.load_model('fine_tuning_demo.h5')
+	model = keras.models.load_model('../saved_models/fine_tuning_demo.h5')
 	
 	model.summary()
 	
@@ -87,8 +87,9 @@ else:
 	model.summary()
 
 	model.compile(optimizer=Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
+	model.save("../saved_models/fine_tuning.h5")
 	model.fit(x=train_batches, validation_data=valid_batches, epochs=10, verbose=2)
-	model.save("fine_tuning_demo.h5")
+	model.save("../saved_models/fine_tuning_demo.h5")
 	#assert model.history.history.get('accuracy')[-1] > 0.95
 
 # Prediction
