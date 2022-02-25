@@ -19,7 +19,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras import Model
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.metrics import categorical_crossentropy
 import matplotlib.pyplot as plt
@@ -91,13 +91,14 @@ else:
 	efficientnet_model.summary()
 	
 	x = efficientnet_model.layers[-1].output
+	x = Dropout(name='top_dropout', rate=0.3)(x)
 	output = Dense(units=5, activation='softmax')(x)
 	
 	model = Model(inputs=efficientnet_model.input, outputs=output)
-	""" For transfer learning
+
 	for layer in model.layers[:-1]:
 		layer.trainable = False
-	"""
+
 	model.summary()
 	
 	learning_rate = 0.0001
