@@ -98,7 +98,7 @@ else:
 	model.summary()
 	
 	learning_rate = 0.0001
-	optimizer = Adam(learnging_rate=learning_rate)
+	optimizer = Adam(learning_rate=learning_rate)
 	loss = 'categorical_crossentropy'
 	epochs = 10
 	

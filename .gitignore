@@ -6,3 +6,5 @@ python_modules/__pycache__
 
 # Ignore weight files
 saved_models
+
+vehicle_key.pem

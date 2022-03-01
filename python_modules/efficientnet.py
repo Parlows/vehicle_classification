@@ -22,6 +22,7 @@ from tensorflow.keras import Model
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.metrics import categorical_crossentropy
+from tensorflow.keras.callbacks import ModelCheckpoint
 import matplotlib.pyplot as plt
 import os
 
@@ -58,9 +59,11 @@ test_batches = ImageDataGenerator(tf.keras.applications.efficientnet.preprocess_
 
 imgs, labels = next(train_batches) # 5 images + 5 labels
 
+
 """
 This function plots an array of images passed as a parameter.
 
+"""
 """
 def plotImages(images_arr):
 	fig, axes = plt.subplots(1, 5, figsize=(20, 20))
@@ -71,6 +74,7 @@ def plotImages(images_arr):
 	plt.tight_layout()
 	plt.show(block=True)
 
+"""
 """
 print(labels)
 plotImages(imgs)
@@ -107,7 +111,13 @@ else:
 	epochs = 10
 	
 	model.compile(optimizer=optimizer, loss=loss, metrics=['accuracy'])
-	model.fit(x=train_batches, validation_data=valid_batches, epochs=epochs, verbose=2)
+	
+	checkpoint_path = "../saved_models/"
+	callbacks = [
+		ModelCheckpoint(checkpoint_path),
+	]
+	
+	model.fit(x=train_batches, validation_data=valid_batches, epochs=epochs, callbacks=[callbacks], verbose=2)
 	model.save('../saved_models/efficientnet.h5')
 
 # Prediction

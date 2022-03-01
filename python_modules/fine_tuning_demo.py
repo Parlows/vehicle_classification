@@ -123,6 +123,7 @@ def plot_confusion_matrix(cm, classes,
 	plt.ylabel("True label")
 	plt.xlabel("Predicted label")
 	plt.show()
+	plt.savefig("hola.png")
 
 predictions = model.predict(x=test_batches, verbose=0)
 print(test_batches.classes)
