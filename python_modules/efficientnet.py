@@ -18,6 +18,8 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from sklearn.metrics import confusion_matrix
+import itertools
 from tensorflow.keras import Model
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
@@ -29,7 +31,7 @@ import os
 # Set the different datasets paths
 train_path = '../augmented_ds/train'
 valid_path = '../augmented_ds/valid'
-test_path = '../augmented_ds/test'
+test_path = '../test'
 
 # Load the sets
 train_batches = ImageDataGenerator(tf.keras.applications.efficientnet.preprocess_input) \
@@ -82,7 +84,7 @@ plotImages(imgs)
 
 # Train or load model
 if 'efficientnet.h5' in os.listdir('../saved_models/'):
-	model = keras.models.load_model('efficientnet.h5')
+	model = keras.models.load_model('../saved_models/efficientnet.h5')
 	model.summary()
 else:
 	# Download model
