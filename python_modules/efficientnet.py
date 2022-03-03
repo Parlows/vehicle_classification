@@ -31,7 +31,7 @@ import os
 # Set the different datasets paths
 train_path = '../augmented_ds/train'
 valid_path = '../augmented_ds/valid'
-test_path = '../test'
+test_path = '../google_test_ds'
 
 # Load the sets
 train_batches = ImageDataGenerator(tf.keras.applications.efficientnet.preprocess_input) \
@@ -83,8 +83,8 @@ plotImages(imgs)
 """
 
 # Train or load model
-if 'efficientnet.h5' in os.listdir('../saved_models/'):
-	model = keras.models.load_model('../saved_models/efficientnet.h5')
+if 'efficientnet_50epochs.h5' in os.listdir('../saved_models/'):
+	model = keras.models.load_model('../saved_models/efficientnet_50epochs.h5')
 	model.summary()
 else:
 	# Download model
@@ -146,7 +146,11 @@ def plot_confusion_matrix(cm, classes,
 	
 	thresh = cm.max() / 2.
 	for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-		plt.text(j, i, cm[i, j],
+		fixed_number = int(cm[i, j]*10000)
+		integer_part = int(fixed_number/100)
+		decimal_part = int(fixed_number%100)
+		string = f"{integer_part}.{decimal_part}%"
+		plt.text(j, i, string,
 			horizontalalignment="center",
 			color="white" if cm[i, j] > thresh else "black")
 	plt.tight_layout()
@@ -159,7 +163,7 @@ predictions = model.predict(x=test_batches, verbose=0)
 cm = confusion_matrix(y_true=test_batches.classes, y_pred=np.argmax(predictions, axis=-1))
 
 cm_plot_labels = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
-plot_confusion_matrix(cm=cm, classes=cm_plot_labels, title='Confusion Matrix')
+plot_confusion_matrix(cm=cm, classes=cm_plot_labels, title='Confusion Matrix', normalize=True)
 
 
 

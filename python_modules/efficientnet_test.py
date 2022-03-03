@@ -44,10 +44,11 @@ img_batch = np.expand_dims(img_array, axis=0)
 img_preprocessed = preprocess_input(img_batch)
 
 # Load model
-if 'efficientnet.h5' in os.listdir('../saved_models/'):
-	model = keras.models.load_model('../saved_models/efficientnet.h5')
+if 'efficientnet_50epochs.h5' in os.listdir('../saved_models/'):
+	model = keras.models.load_model('../saved_models/efficientnet_50epochs.h5')
 	prediction = model.predict(img_preprocessed)
 	categories = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
+
 	for i in range(5):
 		print(f"{categories[i]}: {prediction[0][i]}")
 
