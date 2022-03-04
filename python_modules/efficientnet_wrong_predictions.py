@@ -17,7 +17,6 @@ from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.preprocessing.image import img_to_array
 from sklearn.metrics import confusion_matrix
 import itertools
-from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras import Model
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
@@ -26,8 +25,6 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 import matplotlib.pyplot as plt
 import os
 import shutil
-import tkinter as tk
-from tkinter import filedialog
 
 test_path = "../test_ds/"
 
@@ -43,7 +40,7 @@ if 'efficientnet_50epochs.h5' in os.listdir('../saved_models/'):
 			img = load_img(file_path, target_size=(300,300))
 			img_array = img_to_array(img)
 			img_batch = np.expand_dims(img_array, axis=0)
-			img_preprocessed = preprocess_input(img_batch)
+			img_preprocessed = tf.keras.applications.efficientnetpreprocess_input(img_batch)
 			
 			predictions = model.predict(x=img_preprocessed)
 			
