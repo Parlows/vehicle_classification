@@ -18,10 +18,13 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from sklearn.metrics import confusion_matrix
+import itertools
 from tensorflow.keras import Model
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.metrics import categorical_crossentropy
+from tensorflow.keras.callbacks import ModelCheckpoint
 import matplotlib.pyplot as plt
 import os
 
@@ -77,8 +80,8 @@ plotImages(imgs)
 """
 
 # Train or load model
-if 'resnet50.h5' in os.listdir('../saved_models/'):
-	model = keras.models.load_model('resnet50.h5')
+if 'resnet50_50epochs.h5' in os.listdir('../saved_models/'):
+	model = keras.models.load_model('../saved_models/resnet50_50epochs.h5')
 	model.summary()
 else:
 	# Download model
@@ -143,7 +146,7 @@ predictions = model.predict(x=test_batches, verbose=0)
 cm = confusion_matrix(y_true=test_batches.classes, y_pred=np.argmax(predictions, axis=-1))
 
 cm_plot_labels = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
-plot_confusion_matrix(cm=cm, classes=cm_plot_labels, title='Confusion Matrix')
+plot_confusion_matrix(cm=cm, classes=cm_plot_labels, title='Confusion Matrix', normalize=True)
 
 
 

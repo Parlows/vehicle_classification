@@ -31,7 +31,7 @@ import os
 # Set the different datasets paths
 train_path = '../augmented_ds/train'
 valid_path = '../augmented_ds/valid'
-test_path = '../google_test_ds'
+test_path = '../test_ds'
 
 # Load the sets
 train_batches = ImageDataGenerator(tf.keras.applications.efficientnet.preprocess_input) \

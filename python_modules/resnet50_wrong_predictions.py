@@ -29,8 +29,8 @@ import shutil
 test_path = "../test_ds/"
 
 # Load model
-if 'efficientnet_50epochs.h5' in os.listdir('../saved_models/'):
-	model = keras.models.load_model('../saved_models/efficientnet_50epochs.h5')
+if 'resnet50_50epochs.h5' in os.listdir('../saved_models/'):
+	model = keras.models.load_model('../saved_models/resnet50_50epochs.h5')
 	
 	categories = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
 	wrong_predictions = []
@@ -39,7 +39,7 @@ if 'efficientnet_50epochs.h5' in os.listdir('../saved_models/'):
 		for image_name in os.listdir(test_path + categorie):
 			total += 1
 			file_path = test_path + categorie + "/" + image_name
-			img = load_img(file_path, target_size=(300,300))
+			img = load_img(file_path, target_size=(224,224))
 			img_array = img_to_array(img)
 			img_batch = np.expand_dims(img_array, axis=0)
 			img_preprocessed = tf.keras.applications.efficientnet.preprocess_input(img_batch)

@@ -1,10 +1,15 @@
 """
 
-This module implements a test for a trained EfficientNet model, which
-shows the wrong predicted images.
+This module implements a convolutional neural network with EfficientNet architecture,
+pretrained with ImageNet. The net is intended to classify input images in 5 classes:
+	- Car.
+	- Truck.
+	- Van.
+	- Motorcycle.
+	- Bus.
 
 Author: Pablo Regodón Cerezo.
-Date: March 2022.
+Date: February 2022.
 
 """
 
@@ -17,6 +22,7 @@ from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.preprocessing.image import img_to_array
 from sklearn.metrics import confusion_matrix
 import itertools
+from tensorflow.keras.applications.efficientnet import preprocess_input
 from tensorflow.keras import Model
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
@@ -24,47 +30,28 @@ from tensorflow.keras.metrics import categorical_crossentropy
 from tensorflow.keras.callbacks import ModelCheckpoint
 import matplotlib.pyplot as plt
 import os
-import shutil
+import tkinter as tk
+from tkinter import filedialog
 
-test_path = "../test_ds/"
+root = tk.Tk()
+root.withdraw()
+
+file_path = filedialog.askopenfilename()
+
+img = load_img(file_path, target_size=(300,300))
+img_array = img_to_array(img)
+img_batch = np.expand_dims(img_array, axis=0)
+img_preprocessed = preprocess_input(img_batch)
 
 # Load model
-if 'efficientnet_50epochs.h5' in os.listdir('../saved_models/'):
-	model = keras.models.load_model('../saved_models/efficientnet_50epochs.h5')
-	
+if 'resnet50_50epochs.h5' in os.listdir('../saved_models/'):
+	model = keras.models.load_model('../saved_models/resnet50_50epochs.h5')
+	prediction = model.predict(img_preprocessed)
 	categories = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
-	wrong_predictions = []
-	total = 0
-	for categorie in os.listdir(test_path):
-		for image_name in os.listdir(test_path + categorie):
-			total += 1
-			file_path = test_path + categorie + "/" + image_name
-			img = load_img(file_path, target_size=(300,300))
-			img_array = img_to_array(img)
-			img_batch = np.expand_dims(img_array, axis=0)
-			img_preprocessed = tf.keras.applications.efficientnet.preprocess_input(img_batch)
-			
-			predictions = model.predict(x=img_preprocessed)
-			
-			accuracy = 0
-			i = 0
-			index = 0
-			for accuracies in predictions[0]:
-				if predictions[0][i] > accuracy:
-					accuracy = predictions[0][i]
-					index = i
-				i += 1
-			
-			if categories[index] != categorie:
-				wrong_predictions.append(file_path)
-				print(f"Predicted {file_path} as {categories[index]}.")
-				shutil.copy(file_path, '../predicted_wrong_ds/' + categorie + '/predicted_' + categories[index].lower())
-			
-	length = len(wrong_predictions)
-	print(f"Total of images wrongly predicted: {length}/{total}")
-	
-	
-	
+
+	for i in range(5):
+		print(f"{categories[i]}: {prediction[0][i]}")
+
 """
 # Prediction
 
