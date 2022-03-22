@@ -26,11 +26,11 @@ import matplotlib.pyplot as plt
 import os
 import shutil
 
-test_path = "../test_ds/"
+test_path = "../test_padded_ds/test/"
 
 # Load model
-if 'efficientnet_50epochs.h5' in os.listdir('../saved_models/'):
-	model = keras.models.load_model('../saved_models/efficientnet_50epochs.h5')
+if 'efficientnet_padded_50epochs.h5' in os.listdir('../saved_models/'):
+	model = keras.models.load_model('../saved_models/efficientnet_padded_50epochs.h5')
 	
 	categories = ['Car', 'Truck', 'Bus', 'Van', 'Motorcycle']
 	wrong_predictions = []

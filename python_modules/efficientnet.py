@@ -31,7 +31,7 @@ import os
 # Set the different datasets paths
 train_path = '../augmented_ds/train'
 valid_path = '../augmented_ds/valid'
-test_path = '../test_ds'
+test_path = '../test_padded_ds/test'
 
 # Load the sets
 train_batches = ImageDataGenerator(tf.keras.applications.efficientnet.preprocess_input) \
@@ -83,8 +83,8 @@ plotImages(imgs)
 """
 
 # Train or load model
-if 'efficientnet_50epochs.h5' in os.listdir('../saved_models/'):
-	model = keras.models.load_model('../saved_models/efficientnet_50epochs.h5')
+if 'efficientnet_padded_50epochs.h5' in os.listdir('../saved_models/'):
+	model = keras.models.load_model('../saved_models/efficientnet_padded_50epochs.h5')
 	model.summary()
 else:
 	# Download model

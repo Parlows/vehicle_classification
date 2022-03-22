@@ -14,7 +14,7 @@ import random
 import glob
 from progress_bar import print_progress_bar
 
-dataset_path = '../augmented_ds/'
+dataset_path = '../padded_ds/'
 
 # Organize sets
 os.makedirs(dataset_path + 'valid/Car')
